@@ -1,7 +1,6 @@
 package dev.marcus.oficina_carros.services.implementsServices;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.server.ResponseStatusException;
 import dev.marcus.oficina_carros.entities.carro.Carro;
 import dev.marcus.oficina_carros.entities.carro.CarroDTO;
 import dev.marcus.oficina_carros.entities.carro.CarroUpdateDTO;
-import dev.marcus.oficina_carros.entities.cliente.Cliente;
 import dev.marcus.oficina_carros.repositories.CarroRepository;
 import dev.marcus.oficina_carros.services.CarroService;
 import dev.marcus.oficina_carros.services.ClienteService;
@@ -58,6 +56,13 @@ public class CarrosServiceImpl implements CarroService{
             carro.updateCarro(carroUpdateData);
         }
         carroRepository.save(carro);
+        return carro;
+    }
+
+    @Override
+    public Carro deleteCarro(UUID carroId) {
+        var carro = this.getCarroById(carroId);
+        carroRepository.delete(carro);
         return carro;
     }
     

@@ -11,5 +11,6 @@ public interface CarroService {
     Carro createCarro(CarroDTO carroData);
     List<Carro> getAllCarros();
     Carro getCarroById(UUID carroId);
-    Carro updateCarro(CarroUpdateDTO carroUpdateData ,UUID carroId);
+    Carro updateCarro(CarroUpdateDTO carroUpdateData, UUID carroId);
+    Carro deleteCarro(UUID carroId);
 }
