@@ -39,17 +39,6 @@ public class Cliente {
 
     @Column(nullable = false)
     private String telefone;
-    
-    public void updateCliente(ClienteUpdateDTO clienteUpdateData){
-        if (clienteUpdateData.nome().isPresent() && !clienteUpdateData.nome().get().isEmpty()) 
-            setNome(clienteUpdateData.nome().get());
-        if (clienteUpdateData.sobrenome().isPresent() && !clienteUpdateData.sobrenome().get().isEmpty()) 
-            setSobrenome(clienteUpdateData.sobrenome().get());
-        if (clienteUpdateData.dataNasc().isPresent() && clienteUpdateData.dataNasc().get() != null) 
-            setDataNasc(clienteUpdateData.dataNasc().get());
-        if (clienteUpdateData.telefone().isPresent() && !clienteUpdateData.telefone().get().isEmpty()) 
-            setTelefone(clienteUpdateData.telefone().get());
-    }
 
     public Cliente(ClienteDTO clienteData){
         setCpf(clienteData.cpf());
@@ -57,6 +46,13 @@ public class Cliente {
         setSobrenome(clienteData.sobrenome());
         setDataNasc(clienteData.dataNasc());
         setTelefone(clienteData.telefone());
+    }
+    
+    public void updateCliente(ClienteUpdateDTO clienteUpdateData){
+        if (clienteUpdateData.nome() != null) setNome(clienteUpdateData.nome());
+        if (clienteUpdateData.sobrenome() != null) setSobrenome(clienteUpdateData.sobrenome());
+        if (clienteUpdateData.dataNasc() != null) setDataNasc(clienteUpdateData.dataNasc());
+        if (clienteUpdateData.telefone() != null) setTelefone(clienteUpdateData.telefone());
     }
 
     public boolean validaIdade(LocalDate dataNasc){

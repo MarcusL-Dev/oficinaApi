@@ -4,6 +4,7 @@ import java.time.Year;
 import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
 public record CarroDTO(
@@ -16,7 +17,7 @@ public record CarroDTO(
     String marca,
     @NotBlank
     String modelo,
-    @NotBlank
+    @NotNull
     UUID clienteId
 
 ) {

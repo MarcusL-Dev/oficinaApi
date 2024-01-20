@@ -1,17 +1,17 @@
 package dev.marcus.oficina_carros.entities.cliente;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public record ClienteUpdateDTO(
     
-    Optional<String> nome,
+    String nome,
 
-    Optional<String> sobrenome,
+    String sobrenome,
 
-    Optional<LocalDate> dataNasc,
+    LocalDate dataNasc,
 
-    Optional<String> telefone
+    String telefone
+
 ) {
     
 }

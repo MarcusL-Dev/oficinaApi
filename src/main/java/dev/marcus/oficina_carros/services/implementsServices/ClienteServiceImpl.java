@@ -1,12 +1,12 @@
 package dev.marcus.oficina_carros.services.implementsServices;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import dev.marcus.oficina_carros.entities.cliente.Cliente;
 import dev.marcus.oficina_carros.entities.cliente.ClienteDTO;
@@ -27,25 +27,22 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente createCliente(ClienteDTO clienteData) {
-        Cliente newCliente = new Cliente(clienteData);
+        var newCliente = new Cliente(clienteData);
         return clienteRepository.save(newCliente);
     }
 
     @Override
     public Cliente getClienteById(UUID clienteId) {
-        try {
-            Optional<Cliente> cliente = clienteRepository.findById(clienteId);
-            return cliente.orElseThrow(()-> new NoSuchElementException(
-                "Cliente não encontrado com ID:" + clienteId.toString()
-            ));
-        } catch (NoSuchElementException e) {
-            throw e;
-        }
+        var cliente = clienteRepository.findById(clienteId);
+        return cliente.orElseThrow(()-> new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Cliente não encontrado com ID:" + clienteId.toString()
+        )); 
     }  
 
     @Override
     public Cliente updateCliente(UUID clienteId, ClienteUpdateDTO clienteUpdateData) {
-        Cliente cliente = getClienteById(clienteId);
+        var cliente = getClienteById(clienteId);
         cliente.updateCliente(clienteUpdateData);
         clienteRepository.save(cliente);
         return cliente;
@@ -53,7 +50,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente deleteCliente(UUID clienteId) {
-        Cliente cliente = getClienteById(clienteId);
+        var cliente = getClienteById(clienteId);
         clienteRepository.delete(cliente);
         return cliente;
     }

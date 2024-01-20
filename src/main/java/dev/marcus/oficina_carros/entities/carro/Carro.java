@@ -51,4 +51,15 @@ public class Carro {
         setPlaca(carroData.placa());
         setCliente(cliente);
     }
+
+    public void updateCarro(CarroUpdateDTO carroUpdateData, Cliente cliente){
+        if(carroUpdateData.marca() != null) setMarca(carroUpdateData.marca());
+        if(carroUpdateData.modelo() != null) setModelo(carroUpdateData.modelo());
+        if(carroUpdateData.clienteId() != null) setCliente(cliente);
+    }
+
+    public void updateCarro(CarroUpdateDTO carroUpdateData){
+        if(carroUpdateData.marca() != null) setMarca(carroUpdateData.marca());
+        if(carroUpdateData.modelo() != null) setModelo(carroUpdateData.modelo());
+    }
 }

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 @RestController
 public class ClienteController {
     
@@ -51,7 +51,6 @@ public class ClienteController {
         @PathVariable("id")
         UUID clienteId,
         @RequestBody
-        @Valid
         ClienteUpdateDTO clienteUpdateData
         ){
             return ResponseEntity.ok().body(clienteService.updateCliente(clienteId, clienteUpdateData));
