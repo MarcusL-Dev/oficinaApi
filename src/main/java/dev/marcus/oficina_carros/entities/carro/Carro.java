@@ -1,5 +1,6 @@
 package dev.marcus.oficina_carros.entities.carro;
 
+import java.time.Year;
 import java.util.UUID;
 
 import dev.marcus.oficina_carros.entities.cliente.Cliente;
@@ -29,6 +30,9 @@ public class Carro {
     private String placa;
 
     @Column(nullable = false)
+    private Year ano;
+
+    @Column(nullable = false)
     private String marca;
 
     @Column(nullable = false)
@@ -41,6 +45,7 @@ public class Carro {
 
 
     public Carro(CarroDTO carroData, Cliente cliente){
+        setAno(carroData.ano());
         setMarca(carroData.marca());
         setModelo(carroData.modelo());
         setPlaca(carroData.placa());
