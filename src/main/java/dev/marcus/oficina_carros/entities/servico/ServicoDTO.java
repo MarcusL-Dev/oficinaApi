@@ -4,19 +4,21 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record ServicoDTO (
+
+    @NotNull
+    TipoServico tipoServico,
 
     @NotNull
     @FutureOrPresent
     LocalDate dataInicio,
 
     @NotNull
-    int num_dias,
+    int numDias,
 
-    @NotBlank
+    @NotNull
     UUID carroId
 
 ){

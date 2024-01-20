@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RequestMapping("/carros")
 @RestController
-public class carroController {
+public class CarroController {
 
     @Autowired
     CarroService carroService;

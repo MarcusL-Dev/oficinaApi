@@ -27,14 +27,26 @@ public class Servico {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "tipo_Servico", nullable = false)
+    private TipoServico tipoServico;
+
     @Column(name = "data_inicio", nullable = false)
     private LocalDate dataInicio;
 
     @Column(name = "num_dias", nullable = false)
-    private int num_dias;
+    private int numDias;
 
+    @Column(name = "status", nullable = false)
+    private boolean status = false;
 
     @ManyToOne
     @JoinColumn(name = "carro_id")
     private Carro carro;
+
+    public Servico(ServicoDTO servicoData, Carro carro){
+        setTipoServico(servicoData.tipoServico());
+        setDataInicio(servicoData.dataInicio());
+        setNumDias(servicoData.numDias());
+        setCarro(carro);
+    }
 }
