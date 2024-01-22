@@ -3,6 +3,8 @@ package dev.marcus.oficina_carros.entities.servico;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.marcus.oficina_carros.entities.carro.Carro;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,6 +43,7 @@ public class Servico {
 
     @ManyToOne
     @JoinColumn(name = "carro_id")
+    @JsonIgnore
     private Carro carro;
 
     public Servico(ServicoDTO servicoData, Carro carro){
@@ -48,5 +51,24 @@ public class Servico {
         setDataInicio(servicoData.dataInicio());
         setNumDias(servicoData.numDias());
         setCarro(carro);
+    }
+
+    public void updateServico(ServicoUpdateDTO servicoUpdateData, Carro carro){
+        if(servicoUpdateData.tipoServico() != null) setTipoServico(servicoUpdateData.tipoServico());
+        if(servicoUpdateData.dataInicio() != null) setDataInicio(servicoUpdateData.dataInicio());
+        if(servicoUpdateData.numDias() != null) setNumDias(servicoUpdateData.numDias());
+        if(servicoUpdateData.status() == false || 
+            servicoUpdateData.status() == true) 
+                setStatus(servicoUpdateData.status());
+        setCarro(carro);
+    }
+
+    public void updateServico(ServicoUpdateDTO servicoUpdateData){
+        if(servicoUpdateData.tipoServico() != null) setTipoServico(servicoUpdateData.tipoServico());
+        if(servicoUpdateData.dataInicio() != null) setDataInicio(servicoUpdateData.dataInicio());
+        if(servicoUpdateData.numDias() != null) setNumDias(servicoUpdateData.numDias());
+        if(servicoUpdateData.status() == false || 
+            servicoUpdateData.status() == true) 
+                setStatus(servicoUpdateData.status());
     }
 }

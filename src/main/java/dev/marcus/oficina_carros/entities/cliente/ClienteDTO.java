@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.hibernate.validator.constraints.br.CPF;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
 
 public record ClienteDTO(

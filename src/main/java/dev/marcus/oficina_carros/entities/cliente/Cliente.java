@@ -2,14 +2,19 @@ package dev.marcus.oficina_carros.entities.cliente;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import dev.marcus.oficina_carros.entities.carro.Carro;
 import dev.marcus.oficina_carros.entities.cliente.exceptions.IdadeInvalida;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +30,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "cpf", nullable = false)
     private String cpf;
 
     @Column(nullable = false)
@@ -39,6 +44,9 @@ public class Cliente {
 
     @Column(nullable = false)
     private String telefone;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Carro> carros = new ArrayList<>();
 
     public Cliente(ClienteDTO clienteData){
         setCpf(clienteData.cpf());

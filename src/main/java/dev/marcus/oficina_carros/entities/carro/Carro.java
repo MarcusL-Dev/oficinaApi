@@ -1,9 +1,15 @@
 package dev.marcus.oficina_carros.entities.carro;
 
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.marcus.oficina_carros.entities.cliente.Cliente;
+import dev.marcus.oficina_carros.entities.servico.Servico;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,8 +48,11 @@ public class Carro {
     
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonIgnore
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
+    private List<Servico> servicos = new ArrayList<>();
 
     public Carro(CarroDTO carroData, Cliente cliente){
         setAno(carroData.ano());
@@ -55,7 +65,7 @@ public class Carro {
     public void updateCarro(CarroUpdateDTO carroUpdateData, Cliente cliente){
         if(carroUpdateData.marca() != null) setMarca(carroUpdateData.marca());
         if(carroUpdateData.modelo() != null) setModelo(carroUpdateData.modelo());
-        if(carroUpdateData.clienteId() != null) setCliente(cliente);
+        setCliente(cliente);
     }
 
     public void updateCarro(CarroUpdateDTO carroUpdateData){

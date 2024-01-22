@@ -12,6 +12,7 @@ import dev.marcus.oficina_carros.entities.cliente.Cliente;
 import dev.marcus.oficina_carros.entities.cliente.ClienteDTO;
 import dev.marcus.oficina_carros.entities.cliente.ClienteUpdateDTO;
 import dev.marcus.oficina_carros.repositories.ClienteRepository;
+import dev.marcus.oficina_carros.services.CarroService;
 import dev.marcus.oficina_carros.services.ClienteService;
 
 @Service
