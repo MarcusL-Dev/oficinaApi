@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import dev.marcus.oficina.entities.Pessoa.Pessoa;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteOutDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteUpdateDTO;
+import dev.marcus.oficina.entities.servico.DTOs.ServicoOutDTO;
 import dev.marcus.oficina.entities.veiculo.Veiculo;
+import dev.marcus.oficina.entities.veiculo.VeiculoOutDTO;
 import dev.marcus.oficina.infra.exceptions.IdadeInvalida;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,32 +24,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "clientes")
 @Table(name = "clientes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @Column(name = "cpf", nullable = false)
-    private String cpf;
-
-    @Column(nullable = false)
-    private String nome;
-
-    @Column(nullable = false)
-    private String sobrenome;
-
-    @Column(name = "data_nasc", nullable = false)
-    private LocalDate dataNasc;
-
-    @Column(nullable = false)
-    private String telefone;
+public class Cliente extends Pessoa{
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Veiculo> veiculos = new ArrayList<>();
@@ -74,9 +64,13 @@ public class Cliente {
 
     public void setDataNasc(LocalDate dataNasc){
         if (validaIdade(dataNasc)){
-            this.dataNasc = dataNasc;
+            setDataNasc(dataNasc);
         }else{
             throw new IdadeInvalida();
         }
+    }
+
+    public ClienteOutDTO createClienteOutData(List<VeiculoOutDTO> veiculoOutData){
+        return new ClienteOutDTO(this, veiculoOutData);
     }
 }

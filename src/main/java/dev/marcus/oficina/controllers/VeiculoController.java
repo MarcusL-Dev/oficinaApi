@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.marcus.oficina.entities.veiculo.Veiculo;
 import dev.marcus.oficina.entities.veiculo.VeiculoDTO;
+import dev.marcus.oficina.entities.veiculo.VeiculoOutDTO;
 import dev.marcus.oficina.entities.veiculo.VeiculoUpdateDTO;
 import dev.marcus.oficina.services.VeiculoService;
 import jakarta.transaction.Transactional;
@@ -31,13 +32,13 @@ public class VeiculoController {
     VeiculoService veiculoService;
     
     @GetMapping()
-    public ResponseEntity<List<Veiculo>> getAllVeiculos() {
+    public ResponseEntity<List<VeiculoOutDTO>> getAllVeiculos() {
         return ResponseEntity.ok().body(veiculoService.getAllVeiculos());
     }
 
     @PostMapping()
     @Transactional
-    public ResponseEntity<Veiculo> createVeiculo(@RequestBody @Valid VeiculoDTO veiculoData) {
+    public ResponseEntity<VeiculoOutDTO> createVeiculo(@RequestBody @Valid VeiculoDTO veiculoData) {
         return ResponseEntity.ok().body(veiculoService.createVeiculo(veiculoData));
     }
 

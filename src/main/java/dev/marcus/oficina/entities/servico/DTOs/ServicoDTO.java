@@ -1,8 +1,9 @@
-package dev.marcus.oficina.entities.servico;
+package dev.marcus.oficina.entities.servico.DTOs;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
+import dev.marcus.oficina.entities.servico.TipoServico;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 

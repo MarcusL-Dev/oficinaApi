@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.marcus.oficina.entities.servico.Servico;
-import dev.marcus.oficina.entities.servico.ServicoDTO;
-import dev.marcus.oficina.entities.servico.ServicoUpdateDTO;
+import dev.marcus.oficina.entities.servico.DTOs.ServicoDTO;
+import dev.marcus.oficina.entities.servico.DTOs.ServicoUpdateDTO;
 import dev.marcus.oficina.entities.veiculo.Veiculo;
 import dev.marcus.oficina.infra.exceptions.EntityNotFoundException;
 import dev.marcus.oficina.infra.exceptions.TipoEntity;

@@ -1,4 +1,4 @@
-package dev.marcus.oficina.entities.cliente;
+package dev.marcus.oficina.entities.cliente.DTOs;
 
 import java.time.LocalDate;
 

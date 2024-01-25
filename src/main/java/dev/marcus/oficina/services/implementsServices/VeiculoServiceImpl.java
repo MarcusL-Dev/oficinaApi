@@ -1,5 +1,6 @@
 package dev.marcus.oficina.services.implementsServices;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.marcus.oficina.entities.cliente.Cliente;
+import dev.marcus.oficina.entities.servico.Servico;
+import dev.marcus.oficina.entities.servico.DTOs.ServicoOutDTO;
 import dev.marcus.oficina.entities.veiculo.Veiculo;
 import dev.marcus.oficina.entities.veiculo.VeiculoDTO;
+import dev.marcus.oficina.entities.veiculo.VeiculoOutDTO;
 import dev.marcus.oficina.entities.veiculo.VeiculoUpdateDTO;
 import dev.marcus.oficina.infra.exceptions.EntityNotFoundException;
 import dev.marcus.oficina.infra.exceptions.TipoEntity;
@@ -31,16 +35,37 @@ public class VeiculoServiceImpl implements VeiculoService{
     }
 
     @Override
-    public Veiculo createVeiculo(VeiculoDTO veiculoData) {
+    public VeiculoOutDTO createVeiculo(VeiculoDTO veiculoData) {
         var cliente = clienteService.getClienteById(veiculoData.clienteId());
-        var newveiculo = new Veiculo(veiculoData, cliente);
-        veiculoRepository.save(newveiculo);
-        return newveiculo;
+        var newVeiculo = new Veiculo(veiculoData, cliente);
+        veiculoRepository.save(newVeiculo);
+
+        var clienteOutData = cliente.createClienteOutData(null);
+        return newVeiculo.createVeiculoOutData(clienteOutData, null);
     }
 
     @Override
-    public List<Veiculo> getAllVeiculos() {
-        return veiculoRepository.findAll();
+    public List<VeiculoOutDTO> getAllVeiculos() {
+        var veiculos =  veiculoRepository.findAll();
+        List<VeiculoOutDTO> veiculosOutData = new ArrayList<>();
+
+        for(Veiculo veiculo : veiculos){
+            List<ServicoOutDTO> servicosOutData = new ArrayList<>();
+
+            for(Servico servico : veiculo.getServicos()){
+
+                var atendenteOutData = servico.getAtendente().createAtendenteOutData(null);
+                var servicoOutData = servico.createServicoOutData(null, atendenteOutData);
+
+                servicosOutData.add(servicoOutData);
+            }
+
+            var clienteOutData = veiculo.getCliente().createClienteOutData(null);
+            var veiculoOutData = veiculo.createVeiculoOutData(clienteOutData, servicosOutData);
+            veiculosOutData.add(veiculoOutData);
+        }
+
+        return veiculosOutData;
     }
 
     @Override

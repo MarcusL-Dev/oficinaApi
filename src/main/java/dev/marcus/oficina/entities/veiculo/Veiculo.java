@@ -8,7 +8,9 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import dev.marcus.oficina.entities.cliente.Cliente;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteOutDTO;
 import dev.marcus.oficina.entities.servico.Servico;
+import dev.marcus.oficina.entities.servico.DTOs.ServicoOutDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,7 +55,7 @@ public class Veiculo {
     @JsonIgnore
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "veiculo", cascade = CascadeType.ALL)
     private List<Servico> servicos = new ArrayList<>();
 
     public Veiculo(VeiculoDTO veiculoData, Cliente cliente){
@@ -70,5 +72,9 @@ public class Veiculo {
         if(veiculoUpdateData.modelo() != null) setModelo(veiculoUpdateData.modelo());
         if(veiculoUpdateData.tipoVeiculo() != null) setTipoVeiculo(veiculoUpdateData.tipoVeiculo());
         if(cliente.getCpf() != null) setCliente(cliente);
+    }
+
+    public VeiculoOutDTO createVeiculoOutData(ClienteOutDTO clienteOutData, List<ServicoOutDTO> servicosOutData){
+        return new VeiculoOutDTO(this, clienteOutData, servicosOutData);
     }
 }

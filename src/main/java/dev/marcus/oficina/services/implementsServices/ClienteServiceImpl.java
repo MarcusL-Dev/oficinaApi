@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.marcus.oficina.entities.cliente.Cliente;
-import dev.marcus.oficina.entities.cliente.ClienteDTO;
-import dev.marcus.oficina.entities.cliente.ClienteUpdateDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteUpdateDTO;
 import dev.marcus.oficina.infra.exceptions.EntityNotFoundException;
 import dev.marcus.oficina.infra.exceptions.TipoEntity;
 import dev.marcus.oficina.repositories.ClienteRepository;

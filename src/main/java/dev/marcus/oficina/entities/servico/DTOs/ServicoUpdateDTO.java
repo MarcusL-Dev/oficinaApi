@@ -1,7 +1,9 @@
-package dev.marcus.oficina.entities.servico;
+package dev.marcus.oficina.entities.servico.DTOs;
 
 import java.time.LocalDate;
 import java.util.UUID;
+
+import dev.marcus.oficina.entities.servico.TipoServico;
 
 public record ServicoUpdateDTO(
     

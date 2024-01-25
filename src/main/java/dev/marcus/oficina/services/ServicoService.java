@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import dev.marcus.oficina.entities.servico.Servico;
-import dev.marcus.oficina.entities.servico.ServicoDTO;
-import dev.marcus.oficina.entities.servico.ServicoUpdateDTO;
+import dev.marcus.oficina.entities.servico.DTOs.ServicoDTO;
+import dev.marcus.oficina.entities.servico.DTOs.ServicoUpdateDTO;
 
 public interface ServicoService {
     Servico createServico(ServicoDTO servicoData);

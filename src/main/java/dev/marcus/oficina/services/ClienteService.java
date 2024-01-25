@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import dev.marcus.oficina.entities.cliente.Cliente;
-import dev.marcus.oficina.entities.cliente.ClienteDTO;
-import dev.marcus.oficina.entities.cliente.ClienteUpdateDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteUpdateDTO;
 
 public interface ClienteService {
     List<Cliente> getAllClientes();

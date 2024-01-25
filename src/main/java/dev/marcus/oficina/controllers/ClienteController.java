@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.marcus.oficina.entities.cliente.Cliente;
-import dev.marcus.oficina.entities.cliente.ClienteDTO;
-import dev.marcus.oficina.entities.cliente.ClienteUpdateDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteDTO;
+import dev.marcus.oficina.entities.cliente.DTOs.ClienteUpdateDTO;
 import dev.marcus.oficina.services.ClienteService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
